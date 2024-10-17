@@ -22,7 +22,7 @@ public class Swagger2Config implements WebMvcConfigurer {
     public Docket createRestApi() {
         //扫描控制器中 Swagger2 的注解, .apis 里面的参数表示指定包
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.kgc"))
+                .apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.qd"))
                 .paths(PathSelectors.any())
                 .build();
     }
