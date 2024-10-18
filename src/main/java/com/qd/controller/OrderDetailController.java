@@ -32,6 +32,6 @@ public class OrderDetailController {
     @GetMapping("/getList")
     public Object getList(){
         List<OrderDetail> list = service.list();
-        return ResultUtils.returnDataSuccess(list);
+        return ResultUtils.returnSuccessLayui(list, list.size());
     }
 }

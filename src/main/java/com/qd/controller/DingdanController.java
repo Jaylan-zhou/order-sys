@@ -32,6 +32,6 @@ public class DingdanController {
     @GetMapping("/getList")
     public Object getList(){
         List<Dingdan> list = service.list();
-        return ResultUtils.returnDataSuccess(list);
+        return ResultUtils.returnSuccessLayui(list, list.size());
     }
 }

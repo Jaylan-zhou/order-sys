@@ -28,7 +28,7 @@ public class UsersController {
     @GetMapping("/")
     public Object getList(){
         List<Users> list = service.list();
-        return ResultUtils.returnDataSuccess(list);
+        return ResultUtils.returnSuccessLayui(list, list.size());
     }
 
     @GetMapping("/{id}")

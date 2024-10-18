@@ -34,7 +34,7 @@ public class TableInfoController {
     @GetMapping("/getList")
     public Object getList(){
         List<TableInfo> list = service.list();
-        return ResultUtils.returnDataSuccess(list);
+        return ResultUtils.returnSuccessLayui(list, list.size());
     }
 
 }

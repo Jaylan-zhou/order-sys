@@ -32,6 +32,6 @@ public class ShoppingCarController {
     @GetMapping("/getList")
     public Object getList(){
         List<ShoppingCar> list = service.list();
-        return ResultUtils.returnDataSuccess(list);
+        return ResultUtils.returnSuccessLayui(list, list.size());
     }
 }
