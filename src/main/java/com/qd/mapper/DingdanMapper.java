@@ -2,6 +2,9 @@ package com.qd.mapper;
 
 import com.qd.entity.Dingdan;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.qd.entity.DingdanDto;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface DingdanMapper extends BaseMapper<Dingdan> {
 
+    List<Dingdan> getList(DingdanDto orders);
 }

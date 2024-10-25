@@ -35,8 +35,7 @@ public class TableInfo implements Serializable {
 
     private String tableName;
 
-    @TableField("QRcode")
-    private Blob QRcode;
+    private String qrcode;
 
 
 }

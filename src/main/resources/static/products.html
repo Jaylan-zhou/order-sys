@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>table 组件综合演示 - Layui</title>
+    <title>菜品信息控制台</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,181 @@
 包含：自定义头部工具栏、获取表格数据、表格重载、自定义模板、单双行显示、单元格编辑、自定义底部分页栏、表格相关事件与操作、与其他组件的结合等相对常用的功能，以便快速掌握 table 组件的使用。
 -->
 
+<!--
+添加一个表单,默认不展示.添加的表单
+-->
+<form class="layui-form" action=" " style="display: none" id="addForm">
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜品名</label>
+        <div class="layui-input-block">
+            <input type="text" name="caipinName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-block">
+            <div class="layui-upload-drag" style="display: block;" id="ID-upload-demo-drag">
+                <i class="layui-icon layui-icon-upload"></i>
+                <div>点击上传，或将文件拖拽到此处</div>
+                <div class="layui-hide" id="ID-upload-demo-preview">
+                    <hr> <img src="" alt="上传成功后渲染" style="max-width: 100%">
+                </div>
+            </div>
+            <input type="text" name="photo" id="photo1" readonly lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="price" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">原价</label>
+        <div class="layui-input-block">
+            <input type="text" name="yuanjia" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">口味</label>
+        <div class="layui-input-block">
+            <input type="text" name="kouwei" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">月销量</label>
+        <div class="layui-input-block">
+            <input type="text" name="yuexiao" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上下架</label>
+            <div class="layui-input-block">
+                <select name="shangxiajia">
+                    <option value="0">下架</option>
+                    <option value="1">上架</option>
+                </select>
+            </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属类型</label>
+        <div class="layui-input-block">
+            <select name="blongClazz" class="tid">
+                <!--向服务端发请求-->
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<!--修改的表单-->
+<form class="layui-form" action=""  style="display: none; padding:15px;"  id="updateForm"  lay-filter="updateForm">
+    <div class="layui-form-item">
+        <label class="layui-form-label">id</label>
+        <div class="layui-input-block">
+            <input type="text" name="id" readonly lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜品名</label>
+        <div class="layui-input-block">
+            <input type="text" name="caipinName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-block">
+            <div class="layui-upload-drag" style="display: block;" id="ID-upload-demo-drag2">
+                <i class="layui-icon layui-icon-upload"></i>
+                <div>点击上传，或将文件拖拽到此处</div>
+                <div class="layui-hide" id="ID-upload-demo-preview2">
+                    <hr> <img src="" alt="上传成功后渲染" style="max-width: 100%">
+                </div>
+            </div>
+            <input type="text" name="photo" id="photo2" readonly lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="price" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">原价</label>
+        <div class="layui-input-block">
+            <input type="text" name="yuanjia" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">口味</label>
+        <div class="layui-input-block">
+            <input type="text" name="kouwei" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">月销量</label>
+        <div class="layui-input-block">
+            <input type="text" name="yuexiao" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上下架</label>
+        <div class="layui-input-block">
+            <select name="shangxiajia">
+                <option value="0">下架</option>
+                <option value="1">上架</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属类型</label>
+        <div class="layui-input-block">
+            <select name="blongClazz" class="tid">
+                <!--向服务端发请求-->
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit lay-filter="updateBtn">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<!--修改的表单 结束-->
+
+
+
+<!--查询表单-->
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">菜品名</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="caipinName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">所属类型</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <select name="blongClazz" class="tid" >
+                    <option value="">请选择</option>
+                    <!-- 向服务端发请求获取 -->
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button type="submit" class="layui-btn" lay-submit lay-filter="selectBtn">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
 
 <!--表格容器-->
 <div style="padding: 16px;">
@@ -22,7 +197,7 @@
 <!--表格的头部位置，工具条-->
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
     </div>
 </script>
 
@@ -41,6 +216,118 @@
     layui.use(['table', 'dropdown'], function(){
         var table = layui.table;
         var dropdown = layui.dropdown;
+        var $ = layui.$;
+        var form = layui.form;
+        var upload = layui.upload;
+
+
+        // 渲染上传组件
+        upload.render({
+            elem: '#ID-upload-demo-drag',
+            url: '/upload', // 实际使用时改成您自己的上传接口即可。
+            done: function(res){
+                layer.msg('上传成功');
+                $('#ID-upload-demo-preview').removeClass('layui-hide')
+                    .find('img').attr('src', '/showPic/'+res.data).css('width','100px');
+                //将上传成功的图片名称放在输入框
+                $('#photo1').val(res.data)
+                console.log(res)
+            }
+        });
+
+
+        // 渲染上传组件
+        upload.render({
+            elem: '#ID-upload-demo-drag2',
+            url: '/upload', // 实际使用时改成您自己的上传接口即可。
+            done: function(res){
+                layer.msg('上传成功');
+                $('#ID-upload-demo-preview2').removeClass('layui-hide')
+                    .find('img').attr('src', '/showPic/'+res.data).css('width','100px');
+                //将上传成功的图片名称放在输入框
+                $('#photo2').val(res.data)
+                console.log(res)
+            }
+        });
+
+
+        //发请求，获取“分类列表"，渲染在页面的下拉框class="tid"
+        $.get("/clazz/getList",function(res) {
+            for (let t of res.data) {
+                $(".tid").append(`<option value="${t.id}">${t.clazzname}</option>`)
+            }
+            form.render('select');//仅渲染select元素
+        },"json")
+
+
+
+        // 表单的提交事件监听--------搜索
+        form.on('submit(selectBtn)', function(data){
+            // console.log(data.field)
+            table.reload("test",{where:data.field}); //表格重载
+            return false; // 阻止默认 form 跳转
+        });
+
+
+        // 表单的提交事件监听--------添加
+        form.on('submit(demo1)', function(data){
+            var field = data.field; // 获取表单字段值
+            // 此处可执行 Ajax 等操作
+            $.ajax({
+                url:"/caipin/add",
+                method:"post",
+                contentType: "application/json",
+                data: JSON.stringify(field),
+                dataType:"json",
+                success: function (res) {
+                    if(res.code==200){
+                        layer.msg("成功",{
+                            icon: 1,
+                            time: 1000//一秒后自动关闭
+                        }, function () {
+                            layer.closeAll();
+                            table.reload("test", {})
+                        });
+                    }else{
+                        layer.msg(res.msg)
+                    }
+
+                }
+            })
+            return false; // 阻止默认 form 跳转
+        });
+
+
+
+        // 表单的提交事件监听--------修改
+        form.on('submit(updateBtn)', function(data){
+            var field = data.field; // 获取表单字段值
+            // 此处可执行 Ajax 等操作
+            $.ajax({
+                url:"/caipin/update",
+                method:"put",
+                contentType: "application/json",
+                data: JSON.stringify(field),
+                dataType:"json",
+                success: function (res) {
+                    if(res.code==200){
+                        layer.msg("成功",{
+                            icon: 1,
+                            time: 1000//一秒后自动关闭
+                        }, function () {
+                            layer.closeAll();
+                            table.reload("test", {})
+                        });
+                    }else{
+                        layer.msg(res.msg)
+                    }
+
+                }
+            })
+            return false; // 阻止默认 form 跳转
+        });
+
+
 
         // 表格渲染
         table.render({
@@ -54,10 +341,42 @@
                 {type: 'checkbox', fixed: 'left'},
                 {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRow: '合计：'},
                 {field:'caipinName', width:80, title: '菜品'},
+                {field:'photo', width:80, title: '图片', templet: '<div><img src="/showPic/{{d.photo}}"/></div>'},
+                {field:'price', width:80, title: '价格'},
+                {field:'yuanjia', width:80, title: '原价'},
+                {field:'kouwei', width:80, title: '口味'},
+                {field:'yuexiao', width:80, title: '月销'},
+                {field:'shangxiajia', width:80, title: '上下架', templet: function(d){
+                        if (d.shangxiajia==0){
+                            return '<input type=\"checkbox\" value=\"'+d.id+'\" name=\"open\" lay-skin=\"switch\" lay-filter=\"switchTest\" title=\"上架|下架\">'
+                        }else {
+                            return '<input type="checkbox" value="'+d.id+'" name="open" lay-skin="switch" lay-filter="switchTest" title="上架|下架" checked>'
+                        }
+                        }
+                    },
+                {field:'blongClazz', width:80, title: '所属类型'},
                 {fixed: 'right', title:'操作', width: 134, minWidth: 125, templet: '#toolDemo'}
             ]]
         });
 
+
+        //指定开关事件
+        form.on('switch(switchTest)', function(data){
+            var num = this.checked ? 1 : 0;
+            var field = {id:data.value, shangxiajia:num}
+            //向服务端发送编辑请求
+            $.ajax({
+                url:"/caipin/update",
+                method:"put",
+                contentType: 'application/json',
+                data: JSON.stringify(field) ,
+                dataType:"json",
+                success:function(res){
+                    console.log(res)
+                }
+            })
+
+        });
 
 
 
@@ -68,15 +387,26 @@
             var checkStatus = table.checkStatus(id);
             var othis = lay(this);
             switch(obj.event){
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(layui.util.escape(JSON.stringify(data)));
+                case 'add':
+                    //重置表单
+                    $('#addForm')[0].reset()
+                    layui.form.render();
+                    $('#ID-upload-demo-preview').addClass('layui-hide')
+                        .find('img').attr('src','');
+
+                    // 在此处输入 layer 的任意代码
+                    layer.open({
+                        type: 1, // page 层类型
+                        area: ['80%', '80%'],
+                        title: '请添加菜品信息',
+                        shade: 0.6, // 遮罩透明度
+                        shadeClose: true, // 点击遮罩区域，关闭弹层
+                        maxmin: true, // 允许全屏最小化
+                        anim: 0, // 0-6 的动画形式，-1 不开启
+                        content: $('#addForm')
+                    });
                     break;
-                case 'getData':
-                    var getData = table.getData(id);
-                    console.log(getData);
-                    layer.alert(layui.util.escape(JSON.stringify(getData)));
-                    break;
+
             };
         });
 
@@ -92,14 +422,33 @@
             var data = obj.data; // 获得当前行数据
             // console.log(obj)
             if(obj.event === 'edit'){
+                //给表单赋值
+                form.val('updateForm', data);
+                $('#ID-upload-demo-preview2').removeClass('layui-hide')
+                    .find('img').attr('src','/showPic/'+data.photo).css('width','100px');
+
                 layer.open({
                     title: '编辑 - id:'+ data.id,
                     type: 1,
                     area: ['80%','80%'],
-                    content: '<div style="padding: 16px;">自定义表单元素</div>'
+                    content: $('#updateForm')
                 });
-            } else if(obj.event === 'more'){
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行 [id: '+ data.id +'] 么', function(index){
+                    obj.del(); // 删除对应行（tr）的DOM结构
+                    layer.close(index);// 向服务端发送删除指令
 
+                    // 向服务端发送删除指令
+                    $.ajax({
+                        url:"/caipin/del",
+                        method:"delete",
+                        data:{id: data.id},
+                        dataType:"json",
+                        success:function(res){
+                            alert(res.msg)
+                        }
+                    })
+                });
             }
         });
 

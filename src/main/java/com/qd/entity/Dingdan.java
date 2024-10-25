@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +38,7 @@ public class Dingdan implements Serializable {
 
     private Integer price;
 
+    @ApiModelProperty(value = "0待支付，1已取消 2已完成")
     private Integer status;
 
     private LocalDateTime orderTime;
@@ -46,6 +48,10 @@ public class Dingdan implements Serializable {
     private LocalDateTime completeTime;
 
     private LocalDateTime concelTime;
+
+    //额外的属性
+    @TableField(exist = false)
+    private  String tableName;
 
 
 }

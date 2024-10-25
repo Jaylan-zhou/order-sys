@@ -37,7 +37,7 @@ public class UsersController {
         return ResultUtils.returnDataSuccess(u);
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public Object add(@RequestBody Users u){
         if(service.save(u)){
             return ResultUtils.returnDataSuccess(u);
@@ -54,7 +54,7 @@ public class UsersController {
         return ResultUtils.returnFail("修改失败");
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/del")
     public Object del(@RequestParam Integer id){
         if(service.removeById(id)){
             return ResultUtils.returnSuccess();
