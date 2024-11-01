@@ -59,6 +59,15 @@ public class CaipinController {
         return ResultUtils.returnSuccessLayui(list,total);
     }
 
+    /**
+     * 全查
+     * @return
+     */
+    @GetMapping("/getAllList")
+    public Object getList(){
+        return ResultUtils.returnDataSuccess(service.list());
+    }
+
 
 
     @PostMapping("/add")

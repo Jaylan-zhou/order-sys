@@ -34,12 +34,10 @@
             <li class="layui-nav-item layui-hide layui-show-sm-inline-block">
                 <a href="javascript:;">
                     <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">
-                    tester
+                    <span id="userNameTip">tester</span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">Your Profile</a></dd>
-                    <dd><a href="javascript:;">Settings</a></dd>
-                    <dd><a href="javascript:;">Sign out</a></dd>
+                    <dd><a href="javascript:;" id="logOut">退出</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
@@ -84,6 +82,19 @@
         var layer = layui.layer;
         var util = layui.util;
         var $ = layui.$;
+
+        //给退出按钮绑定单击事件
+        $("#logOut").click(function(){
+            $.get("/users/logOut",function(res){
+                window.location.href = "login.html"
+            },"json")
+        })
+
+
+        //发请求，获取当前登录用户信息
+        $.get("/users/getCurrUser",function(res){
+            $("#userNameTip").html(res.data);
+        },"json")
 
         //头部事件
         util.event('lay-header-event', {

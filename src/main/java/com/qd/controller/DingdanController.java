@@ -39,13 +39,13 @@ public class DingdanController {
 
     /**
      * 修改
-     * @param o
+     * @param
      * @return
      */
-    @PutMapping("/del")
-    public Object update(@RequestBody Dingdan o){
-        if(service.updateById(o)){
-            return ResultUtils.returnDataSuccess(o);
+    @PutMapping("/update")
+    public Object update(@RequestBody Dingdan u){
+        if(service.updateById(u)){
+            return ResultUtils.returnDataSuccess(u);
         }
         return ResultUtils.returnFail("修改失败");
     }

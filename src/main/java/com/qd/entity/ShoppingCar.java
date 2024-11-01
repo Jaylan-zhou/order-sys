@@ -1,8 +1,10 @@
 package com.qd.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,6 +36,17 @@ public class ShoppingCar implements Serializable {
     private Integer caipinId;
 
     private Integer number;
+
+    @TableField(exist = false)
+    private String pid;
+    @TableField(exist = false)
+    private String caipinName;
+    @TableField(exist = false)
+    private String photo;
+    @TableField(exist = false)
+    private BigDecimal price;
+    @TableField(exist = false)
+    private BigDecimal yuanjia;
 
 
 }
