@@ -1,10 +1,14 @@
 package com.qd.service.impl;
 
 import com.qd.entity.Caipin;
+import com.qd.entity.Dingdan;
+import com.qd.entity.DingdanDto;
 import com.qd.mapper.CaipinMapper;
 import com.qd.service.ICaipinService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>

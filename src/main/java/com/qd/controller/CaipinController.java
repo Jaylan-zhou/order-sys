@@ -6,10 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qd.common.result.ResultUtils;
 import com.qd.common.utils.EmptyUtils;
-import com.qd.entity.Caipin;
-import com.qd.entity.Clazz;
-import com.qd.entity.TableInfo;
-import com.qd.entity.Users;
+import com.qd.entity.*;
 import com.qd.service.ICaipinService;
 import com.qd.service.IClazzService;
 import com.qd.service.IUsersService;
@@ -63,10 +60,14 @@ public class CaipinController {
      * 全查
      * @return
      */
+
     @GetMapping("/getAllList")
     public Object getList(){
-        return ResultUtils.returnDataSuccess(service.list());
+        QueryWrapper queryWrapper= new QueryWrapper();
+        queryWrapper.eq("shangxiajia",1);
+        return ResultUtils.returnDataSuccess(service.list(queryWrapper));
     }
+
 
 
 
@@ -93,4 +94,6 @@ public class CaipinController {
         }
         return ResultUtils.returnFail("修改失败");
     }
+
+
 }

@@ -49,7 +49,7 @@ public class UsersController {
     }
 
 
-    @PutMapping("/")
+    @PutMapping("/update")
     public Object update(@RequestBody Users u){
         if(service.updateById(u)){
             return ResultUtils.returnDataSuccess(u);

@@ -1,6 +1,5 @@
 package com.qd.entity;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -11,6 +10,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -36,22 +37,24 @@ public class Dingdan implements Serializable {
 
     private String beizhu;
 
-    private Integer price;
+    private float price;
 
     @ApiModelProperty(value = "0待支付，1已取消 2已完成")
     private Integer status;
 
-    private LocalDateTime orderTime;
+    private Date orderTime;
 
-    private LocalDateTime payTime;
+    private Date payTime;
 
-    private LocalDateTime completeTime;
+    private Date completeTime;
 
-    private LocalDateTime concelTime;
+    private Date concelTime;
 
     //额外的属性
     @TableField(exist = false)
     private  String tableName;
 
+    @TableField(exist = false)
+    private List<OrderDetail> orderDetailList;
 
 }

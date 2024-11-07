@@ -2,6 +2,10 @@ package com.qd.service;
 
 import com.qd.entity.Caipin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qd.entity.Dingdan;
+import com.qd.entity.DingdanDto;
+
+import java.util.List;
 
 /**
  * <p>

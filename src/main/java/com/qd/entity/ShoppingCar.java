@@ -44,7 +44,7 @@ public class ShoppingCar implements Serializable {
     @TableField(exist = false)
     private String photo;
     @TableField(exist = false)
-    private BigDecimal price;
+    private float price;
     @TableField(exist = false)
     private BigDecimal yuanjia;
 

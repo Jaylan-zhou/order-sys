@@ -1,11 +1,10 @@
 package com.qd.controller;
 
 
+import com.github.yulichang.toolkit.JoinWrappers;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.qd.common.result.ResultUtils;
-import com.qd.entity.Clazz;
-import com.qd.entity.Dingdan;
-import com.qd.entity.DingdanDto;
-import com.qd.entity.Users;
+import com.qd.entity.*;
 import com.qd.service.IDingdanService;
 import com.qd.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +49,33 @@ public class DingdanController {
         return ResultUtils.returnFail("修改失败");
     }
 
+    /**
+     *添加
+     */
+    @PostMapping("/add")
+    public Object add(@RequestBody Dingdan o){
+        if(service.addOrderAndDetail(o)){
+            return ResultUtils.returnDataSuccess(o);
+        }
+        return ResultUtils.returnFail("添加失败");
+    }
 
+
+   /**
+    *订单和订单明细表量表联查
+    **/
+    @GetMapping("/getListFront")
+    public Object getListFront(Integer tableId){
+        MPJLambdaWrapper<Dingdan> wrapper = JoinWrappers.lambda(Dingdan.class)
+                .selectAll(Dingdan.class)//查询订单表全部字段
+                .selectCollection(OrderDetail.class,Dingdan::getOrderDetailList) //查询明细表中的数据
+                .leftJoin(OrderDetail.class, OrderDetail::getOrdersId, Dingdan::getId); //两表连查的条件
+        //指定桌号
+        wrapper.eq("table_id",tableId);
+        //按照订单时间倒序
+        wrapper.orderByDesc("order_time");
+        List<Dingdan> list = service.selectJoinList(Dingdan.class, wrapper);
+        return ResultUtils.returnDataSuccess(list);
+    }
 
 }

@@ -133,8 +133,8 @@
                 {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRow: '合计：'},
                 {field:'tableName', width:80, title: '桌号'},
                 {field:'personNumber', width:80, title: '人数'},
-                {field:'beizhu', width:80, title: '备注'},
                 {field:'price', width:80, title: '价格'},
+                {field:'beizhu', width:80, title: '备注'},
                 {field:'status', title: '订单状态', templet:function (d){
                     if (d.status==0){
                         return "<span style='color: #1e9fff'>待支付</span>"
@@ -176,7 +176,7 @@
                         {field:'ordersName',title:'菜品名'},
                         {field:'caipinPrice',title:'菜品价格'},
                         {field:'caipinPhoto',title:'菜品图'},
-                        {field:'number',title:'人数'},
+                        {field:'number',title:'数量'},
                     ]]
                 })
                 //弹窗
@@ -207,8 +207,8 @@
                     })
                 });
             } else if(obj.event === 'fina'){
-                layer.confirm('真的取消行 [id: '+ data.id +'] 么', function(index){
-                    var field ={id:data.id,status:3}
+                layer.confirm('确定完成 [id: '+ data.id +'] 么', function(index){
+                    var field ={id:data.id,status:2}
                     // 向服务端发送删除指令
                     $.ajax({
                         url:"/dingdan/update",

@@ -2,6 +2,7 @@ package com.qd.controller;
 
 
 import com.qd.common.result.ResultUtils;
+import com.qd.entity.Caipin;
 import com.qd.entity.Clazz;
 import com.qd.entity.Users;
 import com.qd.service.IClazzService;
@@ -45,5 +46,14 @@ public class ClazzController {
             return ResultUtils.returnSuccess();
         }
         return ResultUtils.returnFail("删除失败");
+    }
+
+
+    @PutMapping("/update")
+    public Object update(@RequestBody Clazz u){
+        if(service.updateById(u)){
+            return ResultUtils.returnDataSuccess(u);
+        }
+        return ResultUtils.returnFail("修改失败");
     }
 }
